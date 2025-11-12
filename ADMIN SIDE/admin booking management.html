@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travello Admin - Booking Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Setup */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* --- Page Container --- */
+        .bookings-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header {
+            font-size: 30px;
+            font-weight: 700;
+            color: #ff9800; /* A vibrant orange/amber for high visibility */
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+
+        /* --- Filtering and Search Toolbar --- */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #fff8e1; /* Light background for the toolbar */
+            border-radius: 8px;
+            border: 1px solid #ffe0b2;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #495057;
+            align-self: center;
+        }
+
+        .filter-group select, .toolbar input[type="text"] {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .filter-group select:focus, .toolbar input[type="text"]:focus {
+            border-color: #ff9800;
+        }
+
+        /* --- Booking Data Table --- */
+        .data-table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .data-table {
+            width: 100%;
+            min-width: 1000px; 
+            border-collapse: collapse;
+        }
+
+        .data-table th, .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f1f1f1;
+            font-size: 14px;
+        }
+
+        .data-table th {
+            background-color: #ff9800; /* Orange header */
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f7f9fb;
+        }
+        .data-table tbody tr:hover {
+            background-color: #f4f6f8;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-pending { background-color: #fff3e0; color: #ff9800; border: 1px solid #ffcc80; }
+        .status-confirmed { background-color: #e8f5e9; color: #4CAF50; border: 1px solid #a5d6a7; }
+        .status-cancelled { background-color: #ffebee; color: #f44336; border: 1px solid #ef9a9a; }
+
+        /* Action Links */
+        .action-link {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+        .action-link:hover {
+            color: #0056b3;
+        }
+        .cancel-btn {
+            color: #dc3545;
+        }
+        .cancel-btn:hover {
+            color: #a71d2a;
+        }
+
+    </style>
+</head>
+<body>
+
+<div style="background-color: #ffffff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="left image" style="float:left;margin:5px;width:100px;height:auto;">
+    <div style="display: flex; align-items: center;">
+        <a href="admin dashboard.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Dashboard</a>
+        <a href="admin booking management.html" style="text-decoration: none; color: #007bff; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500; background-color: #e9f5ff; border-bottom: 3px solid #007bff;">Booking Management</a>
+        <a href="admin service management.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';"> Service Management</a>
+        <a href="admin packages.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Package Management</a>
+        <a href="admin payment records.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Payment Records</a>
+        <a href="admin users.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Active Users</a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 16px; font-weight: 600; color: #333;">Admin User</span>
+        <a href="admin login page.html" style="text-decoration: none; color: #dc3545; padding: 8px 15px; border: 1px solid #dc3545; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#dc3545'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">Logout</a>
+    </div>
+</div>
+
+    <div class="bookings-container">
+        <div class="page-header">📅 Booking Management - Travello</div>
+
+        <div class="toolbar">
+            <div class="filter-group">
+                <label for="status-filter">Status:</label>
+                <select id="status-filter">
+                    <option value="all">All Statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                <label for="service-filter">Service Type:</label>
+                <select id="service-filter">
+                    <option value="all">All Services</option>
+                    <option value="flight">Flight</option>
+                    <option value="hotel">Hotel</option>
+                    <option value="train">Train</option>
+                </select>
+            </div>
+            <input type="text" placeholder="Search by Booking ID or Customer Name">
+        </div>
+
+        <div class="data-table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Customer</th>
+                        <th>Service Type</th>
+                        <th>Amount</th>
+                        <th>Booking Date</th>
+                        <th>Travel Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TRV-00124</td>
+                        <td>Alia Mehra</td>
+                        <td>Hotel</td>
+                        <td>$850</td>
+                        <td>2025-11-01</td>
+                        <td>2025-12-15</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td>
+                            <a href="#" class="action-link">View Details</a>
+                            <a href="#" class="action-link">Confirm</a>
+                            <a href="#" class="action-link cancel-btn">Cancel</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TRV-00125</td>
+                        <td>Sonakshi Jha</td>
+                        <td>Flight</td>
+                        <td>$1,200</td>
+                        <td>2025-10-25</td>
+                        <td>2025-11-05</td>
+                        <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                        <td>
+                            <a href="#" class="action-link">View Details</a>
+                            <a href="#" class="action-link cancel-btn">Cancel</a>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>TRV-00126</td>
+                        <td>Priya Ahuja</td>
+                        <td>Train</td>
+                        <td>$180</td>
+                        <td>2025-10-29</td>
+                        <td>2025-11-10</td>
+                        <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                        <td>
+                            <a href="#" class="action-link">View Details</a>
+                            <a href="#" class="action-link cancel-btn">Cancel</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TRV-00127</td>
+                        <td>Shreya Shah</td>
+                        <td>Flight</td>
+                        <td>$1,500</td>
+                        <td>2025-10-15</td>
+                        <td>2025-11-20</td>
+                        <td><span class="status-badge status-cancelled">Cancelled</span></td>
+                        <td>
+                            <a href="#" class="action-link">View Details</a>
+                            <a href="#" class="action-link">Refund</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Login Card Container */
+        .login-container {
+            background-color: #ffffff; /* White card background */
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Logo/Title */
+        .logo {
+            font-size: 28px;
+            font-weight: 600;
+            color: red; /* Primary Blue for brand name */
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 16px;
+            color: #6c757d; /* Gray for subheading */
+            margin-bottom: 30px;
+        }
+
+        /* Form Group Styles */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+            position: relative;
+        }
+
+        /* Input Field Styles */
+        .input-field {
+            width: 100%;
+            padding: 12px 12px 12px 40px; /* Space for icon */
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .input-field:focus {
+            border-color: red;
+            outline: none;
+        }
+
+        /* Icon Styles */
+        .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 20px;
+            line-height: 1; /* Ensure proper vertical alignment */
+        }
+
+        /* Login Button Styles */
+        .login-btn {
+            background-color: red; /* Primary Blue */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .login-btn:hover {
+            background-color:red;
+        }
+        .login-btn:active {
+            transform: scale(0.99);
+        }
+
+        /* Forgot Password Link */
+        .forgot-password {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: red;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: red;
+        }
+
+        /* Simulating Icons using simple text for basic HTML/CSS */
+        /* In a real project, you'd use a library like Font Awesome for icons */
+        .icon-user::before { content: "👤"; }
+        .icon-lock::before { content: "🔒"; }
+
+    </style>
+</head>
+<body>
+
+<div style="width: 100%; position: absolute; top: 0; left: 0; background-color: #ffffff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); padding: 15px 30px; display: flex; justify-content: flex-start; align-items: center; height: 60px; box-sizing: border-box;">
+   <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="left image" style="float:left;margin:5px;width:100px;height:auto;">
+   <div style="display: flex; align-items: center;"></div>
+</div>
+
+    <div class="login-container">
+        <div class="logo">Admin Login</div>
+        <div class="title">Sign in to manage your bookings and content.</div>
+
+        <form action="e:\SEM-3\ADMIN SIDE\admin dashboard.html" method="GET"> 
+            <div class="form-group">
+                <span class="icon icon-user"></span>
+                <input type="email" id="email" name="admin_email" class="input-field" placeholder="Admin Email" required>
+            </div>
+
+            <div class="form-group">
+                <span class="icon icon-lock"></span>
+                <input type="password" id="password" name="admin_password" class="input-field" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="login-btn">
+                   SIGN IN
+            </button>
+        </form>
+
+        <a href="#" class="forgot-password">Forgot Password?</a>
+    </div>
+
+</body>
+</html>

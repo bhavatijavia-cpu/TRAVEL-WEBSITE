@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travello Admin - User Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Setup */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* --- Page Container --- */
+        .users-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header {
+            font-size: 30px;
+            font-weight: 700;
+            color: #009688; /* A calming, professional green/teal color */
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+
+        /* --- Search and Quick Stats Bar --- */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 5px 10px;
+            background-color: #fff;
+            width: 350px;
+        }
+
+        .search-box input {
+            border: none;
+            padding: 8px;
+            width: 100%;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-box span {
+            /* Placeholder for a search icon */
+            color: #6c757d;
+            margin-right: 8px;
+        }
+        
+        .user-stats {
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+        }
+        .user-stats span {
+            color: #009688;
+            font-size: 20px;
+            margin-left: 5px;
+        }
+
+        /* --- User Data Table --- */
+        .data-table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .data-table {
+            width: 100%;
+            min-width: 800px; 
+            border-collapse: collapse;
+        }
+
+        .data-table th, .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f1f1f1;
+            font-size: 14px;
+        }
+
+        .data-table th {
+            background-color: #009688; /* Teal header */
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f7f9fb;
+        }
+        .data-table tbody tr:hover {
+            background-color: #f4f6f8;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-active { background-color: #e0f2f1; color: #009688; border: 1px solid #80cbc4; }
+        .status-inactive { background-color: #fbe9e7; color: #ff5722; border: 1px solid #ffab91; }
+        .status-banned { background-color: #f7f7f7; color: #6c757d; border: 1px solid #dee2e6; }
+
+        /* Action Links */
+        .action-link {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+        .action-link:hover {
+            color: #0056b3;
+        }
+        .reset-btn {
+            color: #ffc107;
+        }
+        .reset-btn:hover {
+            color: #e0a800;
+        }
+
+    </style>
+</head>
+<body>
+
+<div style="background-color: #ffffff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="left image" style="float:left;margin:5px;width:100px;height:auto;">
+    <div style="display: flex; align-items: center;">
+        <a href="admin dashboard.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Dashboard</a>
+        <a href="admin booking management.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Booking Management</a>
+        <a href="admin service management.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Service Management</a>
+        <a href="admin packages.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Package Management</a>
+        <a href="admin payment records.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Payments Records</a>
+        <a href="admin users.html" style="text-decoration: none; color: #007bff; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500; background-color: #e9f5ff; border-bottom: 3px solid #007bff;">Active Users</a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 16px; font-weight: 600; color: #333;">Admin User</span>
+        <a href="admin login page.html" style="text-decoration: none; color: #dc3545; padding: 8px 15px; border: 1px solid #dc3545; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#dc3545'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">Logout</a>
+    </div>
+</div>
+
+    <div class="users-container">
+        <div class="page-header">👥 User Management - Travello</div>
+
+        <div class="toolbar">
+            <div class="search-box">
+                <span>🔍</span> 
+                <input type="text" placeholder="Search for user by name or email">
+            </div>
+            <div class="user-stats">
+                Total Users: <span>1,500</span> | Active: <span>1,230</span>
+            </div>
+        </div>
+
+        <div class="data-table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Bookings</th>
+                        <th>Joined Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>USR-1001</td>
+                        <td>Alia Mehra</td>
+                        <td>alia.m@gmail.com</td>
+                        <td>12</td>
+                        <td>2024-05-10</td>
+                        <td><span class="status-badge status-active">Active</span></td>
+                        <td>
+                            <a href="#" class="action-link">View Bookings</a> | 
+                            <a href="#" class="action-link reset-btn">Reset PWD</a> | 
+                            <a href="#" class="action-link">Deactivate</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>USR-1002</td>
+                        <td>Sonakshi Jha</td>
+                        <td>sona.jha@gmail.com</td>
+                        <td>5</td>
+                        <td>2024-06-25</td>
+                        <td><span class="status-badge status-active">Active</span></td>
+                        <td>
+                            <a href="#" class="action-link">View Bookings</a> | 
+                            <a href="#" class="action-link reset-btn">Reset PWD</a> | 
+                            <a href="#" class="action-link">Deactivate</a>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>USR-1003</td>
+                        <td>Priya Ahuja</td>
+                        <td>priya.ahuja@gmail.com</td>
+                        <td>0</td>
+                        <td>2024-09-01</td>
+                        <td><span class="status-badge status-inactive">Inactive</span></td>
+                        <td>
+                            <a href="#" class="action-link">View Bookings</a> | 
+                            <a href="#" class="action-link reset-btn">Reset PWD</a> | 
+                            <a href="#" class="action-link">Activate</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>

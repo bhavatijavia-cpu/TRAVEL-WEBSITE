@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travello Admin - Service Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Setup */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* --- Page Container --- */
+        .management-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header {
+            font-size: 30px;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+
+        /* --- Tab Navigation --- */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #6c757d;
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+
+        .tab-button.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+
+        .tab-button:hover:not(.active) {
+            color: #495057;
+        }
+
+        /* --- Content Sections --- */
+        .tab-content {
+            padding: 20px 0;
+        }
+
+        .content-panel {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Panel Elements (Forms and Tables) --- */
+        .panel-heading {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+        
+        /* Quick Action Button (Add New) */
+        .add-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #1e7e34;
+        }
+
+        /* Table Styling */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .data-table th, .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f1f1f1;
+            font-size: 14px;
+        }
+        .data-table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+        }
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f7f9fb;
+        }
+        .data-table tbody tr:hover {
+            background-color: #e9f5ff;
+        }
+
+        /* Action Links */
+        .action-link {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+        .action-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div style="background-color: #ffffff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="left image" style="float:left;margin:5px;width:100px;height:auto;">
+    <div style="display: flex; align-items: center;">
+        <a href="admin dashboard.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Dashboard</a>
+        <a href="admin booking management.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Booking Management</a>
+        <a href="admin service management.html" style="text-decoration: none; color: #007bff; padding: 15px 25px; margin: 0 5px; font-weight: 600; border-bottom: 3px solid #007bff; background-color: #e9f5ff;">Service Management</a>
+        <a href="admin packages.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Package Management</a>
+        <a href="admin payment records.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Payment Records</a>
+        <a href="admin users.html" style="text-decoration: none; color: #6c757d; padding: 10px 15px; margin: 0 5px; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#e9ecef'; this.style.color='#007bff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#6c757d';">Active Users</a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 16px; font-weight: 600; color: #333;">Admin User</span>
+        <a href="admin login page.html" style="text-decoration: none; color: #dc3545; padding: 8px 15px; border: 1px solid #dc3545; border-radius: 6px; font-weight: 500;" onmouseover="this.style.backgroundColor='#dc3545'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">Logout</a>
+    </div>
+</div>
+
+    <div class="management-container">
+        <div class="page-header">Service Management - Travello</div>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="flights-panel">✈️ Flights</button>
+            <button class="tab-button" data-tab="hotels-panel">🏨 Hotels</button>
+            <button class="tab-button" data-tab="trains-panel">🚆 Trains</button>
+        </div>
+
+        <div class="tab-content">
+            <div id="flights-panel" class="content-panel active">
+                <div class="panel-heading">Manage Flight Routes</div>
+                <button class="add-btn">+ Add New Flight Route</button>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Route ID</th>
+                            <th>Origin</th>
+                            <th>Destination</th>
+                            <th>Airline</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FL-101</td>
+                            <td>New Delhi (DEL)</td>
+                            <td>London (LHR)</td>
+                            <td>Air India</td>
+                            <td>Active</td>
+                            <td><a href="#" class="action-link">Edit</a> | <a href="#" class="action-link">Fares</a> | <a href="#" class="action-link">Deactivate</a></td>
+                        </tr>
+                        <tr>
+                            <td>FL-102</td>
+                            <td>Mumbai (BOM)</td>
+                            <td>Dubai (DXB)</td>
+                            <td>Indigo</td>
+                            <td>Active</td>
+                            <td><a href="#" class="action-link">Edit</a> | <a href="#" class="action-link">Fares</a> | <a href="#" class="action-link">Deactivate</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="hotels-panel" class="content-panel">
+                 <div class="panel-heading">Manage Hotel Listings</div>
+                 <button class="add-btn">+ Add New Hotel</button>
+
+                 <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Hotel ID</th>
+                            <th>Name</th>
+                            <th>City</th>
+                            <th>Rating</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HTL-201</td>
+                            <td>The Grandeur Palace</td>
+                            <td>Mumbai</td>
+                            <td>5 Star</td>
+                            <td>Live</td>
+                            <td><a href="#" class="action-link">Edit</a> | <a href="#" class="action-link">Rooms</a> | <a href="#" class="action-link">Deactivate</a></td>
+                        </tr>
+                        <tr>
+                            <td>HTL-205</td>
+                            <td>City Stay Inn</td>
+                            <td>New Delhi</td>
+                            <td>3 Star</td>
+                            <td>Live</td>
+                            <td><a href="#" class="action-link">Edit</a> | <a href="#" class="action-link">Rooms</a> | <a href="#" class="action-link">Deactivate</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="trains-panel" class="content-panel">
+                <div class="panel-heading">Manage Train Routes</div>
+                <button class="add-btn">+ Add New Train Route</button>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Train No.</th>
+                            <th>Route Name</th>
+                            <th>Operator</th>
+                            <th>Classes</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T-401</td>
+                            <td>East Coast Express</td>
+                            <td>National Rail</td>
+                            <td>3</td>
+                            <td>Active</td>
+                            <td><a href="#" class="action-link">Edit</a> | <a href="#" class="action-link">Fares</a></td>
+                        </tr>
+                        <tr>
+                            <td>T-405</td>
+                            <td>Mountain Voyager</td>
+                            <td>Alpine Transit</td>
+                            <td>2</td>
+                            <td>Seasonal</td>
+                            <td><a href="#" class="action-link">Edit</a> | <a href="#" class="action-link">Fares</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.tab-button');
+        const contents = document.querySelectorAll('.content-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to the clicked tab
+                tab.classList.add('active');
+
+                // Show the corresponding content panel
+                const targetId = tab.getAttribute('data-tab');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // Set the first tab as active on load
+        if (tabs.length > 0) {
+            tabs[0].click();
+        }
+    });
+</script>
+</html>
