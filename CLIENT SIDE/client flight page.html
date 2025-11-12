@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travello - Book Flights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Navigation Bar Styles --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%; /* Adjust padding as needed */
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky; /* Keeps the nav bar visible at the top */
+            top: 0;
+            z-index: 1000;
+            min-height: 50px;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px; /* Spacing between links */
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links a.nav-link {
+            text-decoration: none;
+            color: #555;
+            font-size: 1.0em;
+            font-weight: 500;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            padding: 5px 0;
+        }
+
+        .nav-links a.nav-link:hover {
+            color: #007bff; /* Highlight color on hover */
+        }
+
+        /* Style for the active/current page link */
+        .nav-links a.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            font-weight: 600;
+        }
+
+        /* Basic responsiveness for smaller screens */
+        @media (max-width: 900px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-bottom: 10px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                margin-top: 10px;
+                gap: 15px;
+            }
+        }
+
+        /* --- Custom body/font style for consistency (from client home page.html) --- */
+        body {
+            font-family: 'Poppins', sans-serif; /* Use the Poppins font for consistency */
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Match the homepage background */
+            color: #333;
+        }
+    </style>
+
+    <style>
+        /* --- Flight Listing Styles --- */
+        .container {
+            width: 80%;
+            max-width: 1100px; /* Added max-width for better structure */
+            margin: 40px auto;
+        }
+
+        .flight-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s; /* Added hover effect */
+        }
+        
+        .flight-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .flight-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .flight-left img {
+            width: 120px;
+            height: 80px;
+            object-fit: contain; /* Changed to 'contain' for logos */
+            border-radius: 8px;
+            border: 1px solid #eee; /* Added a light border for logos */
+        }
+
+        .flight-details h3 {
+            margin: 0;
+            font-size: 1.2em; /* Adjusted font size */
+            color: #007bff; /* Made airline name stand out */
+        }
+
+        .flight-details p {
+            margin: 3px 0;
+            color: #555;
+            font-size: 0.9em; /* Adjusted font size */
+        }
+        
+        /* Time and Route Specific Styling */
+        .flight-details p:nth-child(2) {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .flight-price {
+            text-align: right;
+            min-width: 100px;
+        }
+
+        .flight-price p {
+            margin: 0;
+            font-size: 1.5em; /* Increased font size */
+            font-weight: bold;
+            color: #e60000;
+        }
+
+        .book-btn {
+            margin-top: 8px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px; /* Increased padding */
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .book-btn:hover {
+            background-color: #218838;
+        }
+
+        h2 {
+            color: #222;
+            margin-bottom: 25px;
+            font-weight: 700;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #007bff;
+            display: inline-block;
+        }
+
+        /* Media query adjustments for flight cards on smaller screens */
+        @media (max-width: 700px) {
+            .flight-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .flight-left {
+                margin-bottom: 15px;
+            }
+            .flight-price {
+                align-self: flex-end;
+            }
+        }
+        
+        /* --- Booking Confirmed Page Styles --- */
+        .confirmation-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 50px;
+            background-color: #fff;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+            max-width: 600px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .confirmation-box .icon {
+            font-size: 4em;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .confirmation-box h1 {
+            color: #28a745;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .confirmation-box p {
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .home-btn {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="client home page.html" class="logo"></a>
+        <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="Travello Logo" style="float:left;margin:5px;width:100px;height:auto;">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="client home page.html" class="nav-link">Home</a></li>
+                <li><a href="client flight page.html" class="nav-link active">Flights</a></li> 
+                <li><a href="client hotel page.html" class="nav-link">Hotels</a></li>
+                <li><a href="client train page.html" class="nav-link">Trains</a></li>
+                <li><a href="client booking page.html" class="nav-link">My Bookings</a></li>
+                <li><a href="client payment page.html" class="nav-link">Payments</a></li>
+                <li><a href="client about us page.html" class="nav-link">About Us</a></li>
+                <li><a href="client contact us page.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content-area" id="flights-list">
+        <div class="container">
+            <h2>Available Flights (15 January 2025)</h2>
+
+            <div class="flight-card">
+                <div class="flight-left">
+                    <img src="e:\SEM-3\CLIENT SIDE\air india.jpg" style="width:200px;height:120px;">
+                    <div class="flight-details">
+                        <h3>Air India</h3>
+                        <p>01:00PM → 03:30PM</p>
+                        <p>RJKT → GOA (Direct)</p>
+                        <p>Duration: 2h 30m | Class: ECONOMY</p>
+                    </div>
+                </div>
+                <div class="flight-price">
+                    <p>₹3,500</p>
+                    <button class="book-btn" onclick="showConfirmation()">Book Now</button>
+                </div>
+            </div>
+
+            <div class="flight-card">
+                <div class="flight-left">
+                    <img src="e:\SEM-3\CLIENT SIDE\spicejet.jpg" style="width:200px;height:120px;">
+                    <div class="flight-details">
+                        <h3>SpiceJet</h3>
+                        <p>09:00AM → 11:00AM</p>
+                        <p>AHMD → MUM (Direct)</p>
+                        <p>Duration: 2h 30m | Class: BUSINESS</p>
+                    </div>
+                </div>
+                <div class="flight-price">
+                    <p>₹4,800</p>
+                    <button class="book-btn" onclick="showConfirmation()">Book Now</button>
+                </div>
+            </div>
+
+            <div class="flight-card">
+                <div class="flight-left">
+                    <img src="e:\SEM-3\CLIENT SIDE\indigo.jpg" style="width:200px;height:120px;">
+                    <div class="flight-details">
+                        <h3>IndiGo</h3>
+                        <p>07:00PM → 09:30PM</p>
+                        <p>RJKT → DEL (Direct)</p>
+                        <p>Duration: 2h 30m | Class: FIRST</p>
+                    </div>
+                </div>
+                <div class="flight-price">
+                    <p>₹2,000</p>
+                    <button class="book-btn" onclick="showConfirmation()">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showConfirmation() {
+            // Get the main content area element
+            const mainContent = document.getElementById('flights-list');
+            
+            // Generate the HTML for the "Booking Confirmed" page
+            const confirmationHTML = `
+                <div class="confirmation-box">
+                    <div class="icon"></div>
+                    <h1>Booking Confirmed!</h1>
+                    <p>Your flight has been successfully booked. A detailed ticket and invoice have been sent to your email.</p>
+                    <p style="font-weight: 600; color: #007bff;">Thank you for choosing Travello.</p>
+                    <a href="client home page.html" class="home-btn">Go to Home Page</a>
+                </div>
+            `;
+
+            // Replace the entire content of the flights list with the confirmation page
+            mainContent.innerHTML = confirmationHTML;
+
+            // Optional: Scroll to the top to ensure the message is visible
+            window.scrollTo(0, 0);
+        }
+
+        // Attach the showConfirmation function to all 'Book Now' buttons
+        // This is done via the 'onclick' attribute in the HTML for simplicity, 
+        // but this code block keeps the original HTML structure and is not strictly needed 
+        // if the onclick is already in the HTML. I'll leave it in the HTML as requested.
+    </script>
+</body>
+</html>

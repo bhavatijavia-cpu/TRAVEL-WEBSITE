@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travello - Explore the World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Navigation Bar Styles (Unchanged) --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            min-height: 50px;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links a.nav-link {
+            text-decoration: none;
+            color: #555;
+            font-size: 1.0em;
+            font-weight: 500;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            padding: 5px 0;
+        }
+
+        .nav-links a.nav-link:hover {
+            color: #007bff;
+        }
+
+        .nav-links a.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-bottom: 10px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                margin-top: 10px;
+                gap: 15px;
+            }
+        }
+    </style>
+    <style>
+        /* ==================================== */
+        /* === TRAVELLO HOMEPAGE STYLES (2) === */
+        /* ==================================== */
+        
+        /* General Styles and Reset */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .main-content {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .sidebar-login {
+            flex: 1;
+            min-width: 280px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .sidebar-login h3 {
+            color: #007bff;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .login-btn:hover {
+            opacity: 0.9;
+        }
+
+        .primary-login {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .social-login {
+            background-color: #f1f1f1;
+            color: #333;
+            text-align: left;
+            padding-left: 15px;
+        }
+
+        .hero-content {
+            flex: 3;
+        }
+        
+        /* ==================================== */
+        /* === CAROUSEL/SLIDER STYLES (NEW) === */
+        /* ==================================== */
+
+        .hero-image {
+            height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden; /* **CRUCIAL: Hides the non-visible slides** */
+            margin-bottom: 20px;
+        }
+        
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            /* Total width for 5 slides: 500% */
+            width: 500%; 
+            transition: transform 1s ease-in-out; /* Smooth transition for sliding */
+        }
+        
+        .carousel-slide {
+            /* Each slide must be 1/5 of the track width */
+            width: calc(100% / 5); 
+            flex-shrink: 0; /* Prevents slides from shrinking */
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px; /* Apply to image to match container */
+            display: block;
+        }
+        
+        /* Overlay text styles (unchanged, applied to the slide) */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        .hero-text h1 {
+            color: white;
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-text p {
+            color: #f8f9fa;
+            font-size: 1.2em;
+            margin-top: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="client home page.html" class="logo"></a>
+        <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="Travello Logo" style="float:left;margin:5px;width:100px;height:auto;">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="client home page.html" class="nav-link active">Home</a></li>
+                <li><a href="client flight page.html" class="nav-link">Flights</a></li>
+                <li><a href="client hotel page.html" class="nav-link">Hotels</a></li>
+                <li><a href="client train page.html" class="nav-link">Trains</a></li>
+                <li><a href="client booking page.html" class="nav-link">My Bookings</a></li>
+                <li><a href="client payment page.html" class="nav-link">Payments</a></li>
+                <li><a href="client about us page.html" class="nav-link">About Us</a></li>
+                <li><a href="client contact us page.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-content">
+        
+        <aside class="sidebar-login">
+            <h3>Login</h3>
+            <form id="loginForm"> 
+                <input type="email" class="login-input" placeholder="Email ID" required>
+                <input type="password" class="login-input" placeholder="Password" required>
+                
+                <button type="submit" class="login-btn primary-login" id="loginButton"> 
+                    LOGIN
+                </button>
+            </form>
+            
+            <div style="margin: 15px 0; color: #adb5bd; text-align: center;">— OR —</div>
+            <form>
+            <button class="login-btn social-login">
+                &nbsp; *Continue with Google*
+            </button>
+            
+            <button class="login-btn social-login">
+                &nbsp; *Continue with Mobile Number*
+            </button>
+            </form>
+        </aside>
+
+        <section class="hero-content">
+            
+            <div class="hero-image" role="img" aria-label="A stunning beach and ocean view, advertising a travel adventure.">
+                <div class="carousel-track" id="carouselTrack">
+                    
+                    <div class="carousel-slide">
+                        <img src="e:\SEM-3\CLIENT SIDE\beach.jpg" alt="Beautiful Beach Sunset">
+                        <div class="hero-overlay">
+                            <div class="hero-text">
+                                <h1>Your Next Adventure Starts Here.</h1>
+                                <p>Explore flights, hotels, and trains with Travello—The simplest way to travel.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <img src="e:\SEM-3\CLIENT SIDE\mountain.jpg" alt="Cityscape at Night">
+                        <div class="hero-overlay">
+                            <div class="hero-text">
+                               <h1>Your Next Adventure Starts Here.</h1>
+                                <p>Explore flights, hotels, and trains with Travello—The simplest way to travel.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <img src="e:\SEM-3\CLIENT SIDE\hill.jpg" alt="Snowy Mountain View">
+                        <div class="hero-overlay">
+                            <div class="hero-text">
+                                <h1>Your Next Adventure Starts Here.</h1>
+                                <p>Explore flights, hotels, and trains with Travello—The simplest way to travel.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide">
+                        <img src="e:\SEM-3\CLIENT SIDE\pool.jpg" alt="Ancient Ruins">
+                        <div class="hero-overlay">
+                            <div class="hero-text">
+                                <h1>Your Next Adventure Starts Here.</h1>
+                                <p>Explore flights, hotels, and trains with Travello—The simplest way to travel.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-slide">
+                        <img src="e:\SEM-3\CLIENT SIDE\road.jpg" alt="Desert landscape">
+                        <div class="hero-overlay">
+                            <div class="hero-text">
+                                <h1>Your Next Adventure Starts Here.</h1>
+                                <p>Explore flights, hotels, and trains with Travello—The simplest way to travel.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <h2>Featured Deals & Destinations</h2>
+                <p>This is where flight/hotel/train search tabs or featured promotions would go.</p>
+            </div>
+            
+        </section>
+    </div>
+
+    <script>
+        // ====================================
+        // === LOGIN REDIRECT SCRIPT (NEW) ====
+        // ====================================
+        
+        // 1. Get the form element
+        const loginForm = document.getElementById('loginForm');
+
+        // 2. Add an event listener to the form to catch the submit action
+        loginForm.addEventListener('submit', function(event) {
+            // Stop the form from submitting the traditional way (which would cause a page reload/error)
+            event.preventDefault(); 
+            
+            // In a real application, you would check the username/password here!
+            
+            // For a basic redirect demonstration:
+            alert("Login Successful! Redirecting to Flights Page.");
+            
+            // 3. Perform the redirect to the target page
+            window.location.href = "client flight page.html"; 
+        });
+
+
+        // ====================================
+        // === CAROUSEL SCRIPT (EXISTING) ====
+        // ====================================
+        const track = document.getElementById('carouselTrack');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+        const slideInterval = 3000; // 3000 milliseconds = 3 seconds
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            const offset = currentSlide * (100 / totalSlides); 
+            track.style.transform = `translateX(-${offset}%)`;
+        }
+
+        setInterval(nextSlide, slideInterval);
+    </script>
+</body>
+</html>

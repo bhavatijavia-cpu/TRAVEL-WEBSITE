@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraveLLO - My Bookings</title>
+    <style>
+    /* --- Navigation Bar Styles --- */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%; /* Adjust padding as needed */
+        background-color: #ffffff;
+        border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: sticky; /* Keeps the nav bar visible at the top */
+        top: 0;
+        z-index: 1000;
+        min-height: 50px;
+    }
+
+    .logo {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px; /* Spacing between links */
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-links a.nav-link {
+        text-decoration: none;
+        color: #555;
+        font-size: 1.0em;
+        font-weight: 500;
+        transition: color 0.3s ease, border-bottom 0.3s ease;
+        padding: 5px 0;
+    }
+
+    .nav-links a.nav-link:hover {
+        color: #007bff; /* Highlight color on hover */
+    }
+
+    /* Style for the active/current page link */
+    .nav-links a.active {
+        color: #007bff;
+        border-bottom: 2px solid #007bff;
+        font-weight: 600;
+    }
+
+    /* Basic responsiveness for smaller screens */
+    @media (max-width: 900px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-bottom: 10px;
+        }
+        .nav-links {
+            flex-wrap: wrap;
+            margin-top: 10px;
+            gap: 15px;
+        }
+    }
+</style>
+    <style>
+        /* General Reset and Base Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Existing non-nav styles preserved */
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            font-size: 2em;
+            color: #333;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .booking-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f1f1f1;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .card-header .title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .card-header .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .card-header .status.confirmed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .card-header .status.completed {
+            background-color: #fcf8e3;
+            color: #8a6d3b;
+        }
+
+        .card-body {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .booking-details p {
+            margin: 5px 0;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+            padding-top: 10px;
+        }
+
+        .action-button {
+            display: block;
+            width: 150px;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+
+        .print-button {
+            background-color: #28a745; /* Green */
+            color: white;
+        }
+
+        .print-button:hover {
+            background-color: #1e7e34;
+        }
+
+        .manage-button {
+            background-color: #dc3545; /* Red */
+            color: white;
+        }
+
+        .manage-button:hover {
+            background-color: #c82333;
+        }
+        
+        .view-button {
+            background-color: #ffc107; /* Yellow */
+            color: #333;
+        }
+        
+        .view-button:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="client home page.html" class="logo"></a>
+        <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="left image" style="float:left;margin:5px;width:100px;height:auto;">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="client home page.html" class="nav-link">Home</a></li>
+                <li><a href="client flight page.html" class="nav-link">Flights</a></li>
+                <li><a href="client hotel page.html" class="nav-link">Hotels</a></li>
+                <li><a href="client train page.html" class="nav-link">Trains</a></li>
+                <li><a href="client booking page.html" class="nav-link active">My Bookings</a></li>
+                <li><a href="client payment page.html" class="nav-link">Payments</a></li>
+                <li><a href="client about us page.html" class="nav-link">About Us</a></li>
+                <li><a href="client contact us page.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 class="page-header">Your Trip Bookings</h1>
+
+        <div class="booking-card">
+            <div class="card-header">
+                <div class="title"><i class="fa-solid fa-plane"></i> Flight to London</div>
+                <div class="status confirmed">Confirmed</div>
+            </div>
+            <div class="card-body">
+                <div class="booking-details">
+                    <p>Booking ID: <strong>TKL-F10234</strong></p>
+                    <p>Traveler: **Mansi Sharma**</p>
+                    <p>Date: **20 December 2025**</p>
+                    <p>Route: **NYC to LON**</p>
+                    <p>Airline: **Air India**</p>
+                    <p>Seats: **2A, 2B**</p>
+                </div>
+                <div class="actions">
+                    <a href="#" class="action-button print-button"><i class="fa-solid fa-file-pdf"></i> View Ticket</a>
+                    <a href="#" class="action-button manage-button"><i class="fa-solid fa-times"></i> Cancel Booking</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-card">
+            <div class="card-header">
+                <div class="title"><i class="fa-solid fa-hotel"></i> Hotel in Goa</div>
+                <div class="status confirmed">Confirmed</div>
+            </div>
+            <div class="card-body">
+                <div class="booking-details">
+                    <p>Booking ID: <strong>WHT-H30591</strong></p>
+                    <p>Hotel: **The Grand Plaza**</p>
+                    <p>Check-in: **10 January 2026**</p>
+                    <p>Check-out: **14 January 2026**</p>
+                    <p>Guests: **2 Guests, 1 Room**</p>
+                    <p>Total Nights: **4 Nights**</p>
+                </div>
+                <div class="actions">
+                    <a href="#" class="action-button print-button"><i class="fa-solid fa-file-pdf"></i> View Voucher</a>
+                    <a href="#" class="action-button manage-button"><i class="fa-solid fa-times"></i> Cancel Booking</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-card" style="opacity: 0.8;">
+            <div class="card-header">
+                <div class="title"><i class="fa-solid fa-train"></i> Train to Delhi</div>
+                <div class="status completed">Completed</div>
+            </div>
+            <div class="card-body">
+                <div class="booking-details">
+                    <p>Booking ID: <strong>WLJ-T20188</strong></p>
+                    <p>Date: **15 September 2025**</p>
+                    <p>Route: **RJKT to DEL**</p>
+                    <p>Rail Service: **RAJDHANI EXPRESS**</p>
+                    <p>Travel Class: **First Class**</p>
+                </div>
+                <div class="actions">
+                    <a href="#" class="action-button view-button"><i class="fa-solid fa-clipboard"></i> View Invoice</a>
+                    <a href="#" class="action-button view-button"><i class="fa-solid fa-star"></i> Leave Review</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraveLLO - About Us</title>
+    <style>
+    /* --- Navigation Bar Styles --- */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%; /* Adjust padding as needed */
+        background-color: #ffffff;
+        border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: sticky; /* Keeps the nav bar visible at the top */
+        top: 0;
+        z-index: 1000;
+        min-height: 50px;
+    }
+
+    .logo {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px; /* Spacing between links */
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-links a.nav-link {
+        text-decoration: none;
+        color: #555;
+        font-size: 1.0em;
+        font-weight: 500;
+        transition: color 0.3s ease, border-bottom 0.3s ease;
+        padding: 5px 0;
+    }
+
+    .nav-links a.nav-link:hover {
+        color: #007bff; /* Highlight color on hover */
+    }
+
+    /* Style for the active/current page link */
+    .nav-links a.active {
+        color: #007bff;
+        border-bottom: 2px solid #007bff;
+        font-weight: 600;
+    }
+
+    /* Basic responsiveness for smaller screens */
+    @media (max-width: 900px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-bottom: 10px;
+        }
+        .nav-links {
+            flex-wrap: wrap;
+            margin-top: 10px;
+            gap: 15px;
+        }
+    }
+</style>
+    <style>
+        /* General Reset and Base Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Existing non-nav styles preserved */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .hero-section {
+            background-color: #007bff;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .hero-section p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content-card {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-card h2 {
+            color: #007bff;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .value-item i {
+            font-size: 3em;
+            color: #28a745; /* Success color for values */
+            margin-bottom: 15px;
+        }
+
+        .value-item h3 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .team-grid {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .team-member {
+            width: 45%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+
+        .team-member h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .cta-footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #ffc107; /* Warning color for CTA */
+            color: #333;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="client home page.html" class="logo"></a>
+        <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="left image" style="float:left;margin:5px;width:100px;height:auto;">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="client home page.html" class="nav-link">Home</a></li>
+                <li><a href="client flight page.html" class="nav-link">Flights</a></li>
+                <li><a href="client hotel page.html" class="nav-link">Hotels</a></li>
+                <li><a href="client train page.html" class="nav-link">Trains</a></li>
+                <li><a href="client booking page.html" class="nav-link">My Bookings</a></li>
+                <li><a href="client payment page.html" class="nav-link">Payments</a></li>
+                <li><a href="client about us page.html" class="nav-link active">About Us</a></li>
+                <li><a href="client contact us page.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+
+        <div class="hero-section">
+            <h1>Our Mission: Travel Simplified</h1>
+            <p>We believe finding and booking your next adventure should be easy, fast, and transparent.</p>
+        </div>
+
+        <div class="content-card">
+            <h2>The TraveLLO Difference</h2>
+            <p>TraveLLO was founded on the idea that travel planning should be inspiring, not stressful. We combine powerful technology with dedicated human support to give you the best experience from the first click to your final destination.</p>
+            
+            <div class="values-grid">
+                <div class="value-item">
+                    <i class="fa-solid fa-shield-alt"></i>
+                    <h3>Trust & Transparency</h3>
+                    <p>No hidden fees, no confusing fine print. We show you the real price, always.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fa-solid fa-rocket"></i>
+                    <h3>Speed & Efficiency</h3>
+                    <p>Our powerful search algorithms find the fastest, cheapest routes in seconds.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fa-solid fa-handshake"></i>
+                    <h3>24/7 Human Support</h3>
+                    <p>When plans change, our global team is ready to assist you anytime, anywhere.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2>Meet the TraveLLO Leadership</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>Ananya Singh</h3>
+                    <p>CEO & Co-Founder</p>
+                </div>
+                <div class="team-member">
+                    <h3>Dr. Priya Sharma</h3>
+                    <p>Chief Technology Officer</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-footer">
+            <h3>Ready to Experience the TraveLLO Difference?</h3>
+            <a href="#" class="cta-button">Start Planning Your Next Trip</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travello - Secure Payment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+    /* --- Navigation Bar Styles (UNCHANGED) --- */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%; /* Adjust padding as needed */
+        background-color: #ffffff;
+        border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: sticky; /* Keeps the nav bar visible at the top */
+        top: 0;
+        z-index: 1000;
+        min-height: 50px;
+    }
+
+    .logo {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px; /* Spacing between links */
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-links a.nav-link {
+        text-decoration: none;
+        color: #555;
+        font-size: 1.0em;
+        font-weight: 500;
+        transition: color 0.3s ease, border-bottom 0.3s ease;
+        padding: 5px 0;
+    }
+
+    .nav-links a.nav-link:hover {
+        color: #007bff; /* Highlight color on hover */
+    }
+
+    /* Style for the active/current page link */
+    .nav-links a.active {
+        color: #007bff;
+        border-bottom: 2px solid #007bff;
+        font-weight: 600;
+    }
+
+    /* Basic responsiveness for smaller screens */
+    @media (max-width: 900px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-bottom: 10px;
+        }
+        .nav-links {
+            flex-wrap: wrap;
+            margin-top: 10px;
+            gap: 15px;
+        }
+    }
+
+    /* ==================================== */
+    /* === TRAVELLO PAYMENT PAGE STYLES === */
+    /* ==================================== */
+    
+    /* General Styles and Reset */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa; /* Light background */
+        color: #333;
+    }
+
+    .main-content {
+        display: flex;
+        max-width: 1200px;
+        margin: 20px auto;
+        gap: 20px;
+        padding: 0 20px;
+    }
+    
+    /* Main Payment Container (Replaces Hero Content) */
+    .payment-container {
+        flex: 3;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-container h2 {
+        color: #007bff;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        font-weight: 700;
+    }
+
+    /* Order Summary Sidebar (Replaces Login Sidebar) */
+    .order-summary {
+        flex: 1;
+        min-width: 280px;
+        background-color: #f0f8ff; /* Light blue background for emphasis */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        height: fit-content;
+    }
+
+    .order-summary h3 {
+        color: #0056b3;
+        border-bottom: 1px solid #b3d9ff;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        font-size: 1em;
+        color: #555;
+    }
+
+    .summary-total {
+        border-top: 2px solid #b3d9ff;
+        margin-top: 15px;
+        padding-top: 15px;
+        font-size: 1.2em;
+        font-weight: 700;
+        color: #333;
+    }
+
+    /* Payment Options Styling */
+    .payment-options {
+        margin-bottom: 30px;
+    }
+
+    .payment-option-title {
+        font-size: 1.3em;
+        font-weight: 600;
+        color: #333;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .payment-form-group {
+        margin-bottom: 15px;
+    }
+
+    .payment-input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 1em;
+    }
+    
+    .card-details-row {
+        display: flex;
+        gap: 20px;
+    }
+
+    .card-details-row > div {
+        flex: 1;
+    }
+
+    .pay-btn {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 1.1em;
+        transition: background-color 0.3s;
+        margin-top: 20px;
+        background-color: #28a745; /* Green for success/payment */
+        color: white;
+    }
+
+    .pay-btn:hover {
+        background-color: #218838;
+    }
+    
+    /* Specific input adjustments */
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #555;
+    }
+    
+    .upi-select {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    /* Responsive adjustments for payment page */
+    @media (max-width: 900px) {
+        .main-content {
+            flex-direction: column;
+        }
+        .card-details-row {
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+
+    /* === PAYMENT SUCCESS PAGE STYLES === */
+    .success-container {
+        display: none; /* Initially hidden */
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 40px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        text-align: center;
+        border: 2px solid #28a745;
+    }
+
+    .success-icon {
+        font-size: 4em;
+        color: #28a745;
+        margin-bottom: 15px;
+    }
+
+    .success-container h1 {
+        color: #28a745;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    .success-container p {
+        color: #555;
+        font-size: 1.1em;
+        margin-bottom: 30px;
+    }
+
+    .back-btn {
+        padding: 12px 25px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .back-btn:hover {
+        background-color: #0056b3;
+    }
+
+    </style>
+</head>
+<body>
+    <header class="header" id="main-header">
+        <a href="client home page.html" class="logo"></a>
+        <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="left image" style="float:left;margin:5px;width:100px;height:auto;">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="client home page.html" class="nav-link">Home</a></li>
+                <li><a href="client flight page.html" class="nav-link">Flights</a></li>
+                <li><a href="client hotel page.html" class="nav-link">Hotels</a></li>
+                <li><a href="client train page.html" class="nav-link">Trains</a></li>
+                <li><a href="client booking page.html" class="nav-link">My Bookings</a></li>
+                <li><a href="client payment page.html" class="nav-link active">Payments</a></li> 
+                <li><a href="client about us page.html" class="nav-link">About Us</a></li>
+                <li><a href="client contact us page.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content" id="payment-page">
+        
+        <aside class="order-summary">
+            <h3>💳 Order Summary</h3>
+            <div class="summary-item">
+                <span>Flight/Hotel/Train Base Fare:</span>
+                <span>₹ 15,000</span>
+            </div>
+            <div class="summary-item">
+                <span>Taxes & Fees:</span>
+                <span>₹ 1,800</span>
+            </div>
+            <div class="summary-item">
+                <span>Convenience Fee:</span>
+                <span>₹ 200</span>
+            </div>
+            <div class="summary-item summary-total">
+                <span>TOTAL AMOUNT DUE:</span>
+                <span>₹ 17,000</span>
+            </div>
+            <p style="font-size: 0.9em; margin-top: 15px; color: #6c757d;">
+                *Please complete the payment within 15 minutes to confirm your booking.*
+            </p>
+        </aside>
+
+        <section class="payment-container">
+            <h2>Secure Payment Gateway</h2>
+            
+            <form id="payment-form" onsubmit="handlePayment(event)">
+                
+                <div class="payment-options">
+                    <div class="payment-option-title">
+                        <span style="font-size: 1.5em;">&#9432;</span> Credit / Debit Card
+                    </div>
+                    <div class="payment-form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" class="payment-input" placeholder="XXXX XXXX XXXX XXXX" required pattern="\d{13,19}">
+                    </div>
+                    <div class="payment-form-group">
+                        <label for="card-name">Name on Card</label>
+                        <input type="text" id="card-name" class="payment-input" placeholder="Card Holder Name" required>
+                    </div>
+                    <div class="card-details-row">
+                        <div class="payment-form-group">
+                            <label for="expiry-date">Expiry Date</label>
+                            <input type="text" id="expiry-date" class="payment-input" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])\/\d{2}">
+                        </div>
+                        <div class="payment-form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="password" id="cvv" class="payment-input" placeholder="***" required pattern="\d{3,4}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-options">
+                    <div class="payment-option-title">
+                        <span style="font-size: 1.5em;">&#9993;</span> Net Banking
+                    </div>
+                    <div class="payment-form-group">
+                        <label for="bank-select">Select Your Bank</label>
+                        <select id="bank-select" class="payment-input" required>
+                            <option value="">Select a Bank...</option>
+                            <option value="sbi">State Bank of India</option>
+                            <option value="hdfc">HDFC Bank</option>
+                            <option value="icici">ICICI Bank</option>
+                            <option option value="axis">Axis Bank</option>
+                            <option value="other">Other Banks</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="payment-options">
+                    <div class="payment-option-title">
+                        <span style="font-size: 1.5em;">&#128241;</span> UPI / Wallet
+                    </div>
+                    <div class="payment-form-group">
+                        <label for="upi-vpa">Enter UPI VPA (e.g., username@bankname)</label>
+                        <input type="text" id="upi-vpa" class="payment-input" placeholder="yourname@upi" required>
+                    </div>
+                    <div class="payment-form-group">
+                        <label for="wallet-select">Choose Wallet</label>
+                        <select id="wallet-select" class="upi-select">
+                            <option value="">Select a Wallet (Optional)</option>
+                            <option value="paytm">Paytm</option>
+                            <option value="phonepe">PhonePe</option>
+                            <option value="gpay">Google Pay</option>
+                            <option value="amazonpay">Amazon Pay</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="pay-btn">
+                    PAY ₹ 17,000
+                </button>
+            </form>
+            
+        </section>
+    </div>
+
+    <div class="success-container" id="success-page">
+        <div class="success-icon">✅</div>
+        <h1>Payment Successful!</h1>
+        <p>Your booking has been confirmed. A confirmation email with all details has been sent to your registered email address.</p>
+        <div class="summary-item summary-total" style="justify-content: center;">
+            <span>TOTAL AMOUNT PAID:</span>
+            <span style="color: #28a745;">₹ 17,000</span>
+        </div>
+        <br><br>
+        <a href="client home page.html" class="back-btn">Return to Home</a>
+    </div>
+
+    <script>
+        function handlePayment(event) {
+            // 1. Prevent the default form submission (which causes a page reload)
+            event.preventDefault(); 
+
+            // 2. Hide the payment form content
+            document.getElementById('payment-page').style.display = 'none';
+            document.getElementById('main-header').style.display = 'none'; // Optional: Hide the header too
+
+            // 3. Display the success page content
+            document.getElementById('success-page').style.display = 'block';
+
+            // Optional: You could add a small delay here for a realistic "processing" effect
+            // setTimeout(() => {
+            //     document.getElementById('payment-page').style.display = 'none';
+            //     document.getElementById('success-page').style.display = 'block';
+            // }, 1000); // 1 second delay
+        }
+    </script>
+</body>
+</html>

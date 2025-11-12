@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraveLLO - Book Hotels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+    /* --- Navigation Bar Styles --- */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%; /* Adjust padding as needed */
+        background-color: #ffffff;
+        border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: sticky; /* Keeps the nav bar visible at the top */
+        top: 0;
+        z-index: 1000;
+        min-height: 50px;
+    }
+
+    .logo {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px; /* Spacing between links */
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-links a.nav-link {
+        text-decoration: none;
+        color: #555;
+        font-size: 1.0em;
+        font-weight: 500;
+        transition: color 0.3s ease, border-bottom 0.3s ease;
+        padding: 5px 0;
+    }
+
+    .nav-links a.nav-link:hover {
+        color: #007bff; /* Highlight color on hover */
+    }
+
+    /* Style for the active/current page link */
+    .nav-links a.active {
+        color: #007bff;
+        border-bottom: 2px solid #007bff;
+        font-weight: 600;
+    }
+
+    /* Basic responsiveness for smaller screens */
+    @media (max-width: 900px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-bottom: 10px;
+        }
+        .nav-links {
+            flex-wrap: wrap;
+            margin-top: 10px;
+            gap: 15px;
+        }
+    }
+</style>
+    <style>
+        /* General Reset and Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif; /* Changed to Poppins for consistency */
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Existing non-nav styles preserved */
+
+        .search-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-title {
+            font-size: 1.5em;
+            color: #007bff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 20px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-width: 150px;
+        }
+
+        .search-input,
+        .search-select,
+        .search-button {
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 1.0em;
+        }
+
+        .search-input,
+        .search-select {
+            border: 1px solid #ced4da;
+        }
+
+        .search-button {
+            background-color: #28a745; /* Green for search button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            flex-grow: 0;
+            width: 150px;
+            height: 40px; /* Align with input height */
+        }
+
+        .search-button:hover {
+            background-color: #1e7e34;
+        }
+
+        /* --- Results Section --- */
+        .results-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .results-header {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .hotel-result-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 20px 30px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: box-shadow 0.3s;
+        }
+
+        .hotel-result-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hotel-info {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .hotel-details .name {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .hotel-details img {
+            display: block;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .hotel-details .stars i {
+            color: #ffc107; /* Yellow for stars */
+            font-size: 0.9em;
+        }
+
+        .hotel-details .location {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .amenities-details {
+            margin-top: 5px;
+        }
+
+        .amenities-details p {
+            margin: 5px 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .amenities-details i {
+            color: #007bff;
+            margin-right: 5px;
+        }
+
+        .price-section {
+            text-align: right;
+        }
+
+        .price {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #dc3545; /* Red for price */
+            margin-bottom: 5px;
+        }
+
+        .per-night {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        .book-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer; /* Added cursor for button styling */
+            transition: background-color 0.3s;
+        }
+
+        .book-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- Confirmation Page Styles --- */
+        .confirmation-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 50px;
+            background-color: #fff;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+            max-width: 600px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 300px;
+        }
+        
+        .confirmation-box .icon {
+            font-size: 4em;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .confirmation-box h1 {
+            color: #28a745;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .confirmation-box p {
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .home-btn {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="client home page.html" class="logo"></a>
+        <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="left image" style="float:left;margin:5px;width:100px;height:auto;">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="client home page.html" class="nav-link">Home</a></li>
+                <li><a href="client flight page.html" class="nav-link">Flights</a></li>
+                <li><a href="client hotel page.html" class="nav-link active">Hotels</a></li>
+                <li><a href="client train page.html" class="nav-link">Trains</a></li>
+                <li><a href="client booking page.html" class="nav-link">My Bookings</a></li>
+                <li><a href="client payment page.html" class="nav-link">Payments</a></li>
+                <li><a href="client about us page.html" class="nav-link">About Us</a></li>
+                <li><a href="client contact us page.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content-area" id="hotel-listing-page">
+        <div class="search-container">
+            <h1 class="search-title">Search & Book Hotels</h1>
+            <form class="search-form">
+                <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <input type="text" id="destination" class="search-input" placeholder="City, Hotel, or Landmark" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-in">Check-in</label>
+                    <input type="date" id="check-in" class="search-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-out</label>
+                    <input type="date" id="check-out" class="search-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Guests/Rooms</label>
+                    <select id="guests" class="search-select">
+                        <option>2 Guests, 1 Room</option>
+                        <option>4 Guests, 2 Rooms</option>
+                        <option>1 Guest, 1 Room</option>
+                    </select>
+                </div>
+                <button type="submit" class="search-button">
+                    <i class="fa-solid fa-search"></i> Search
+                </button>
+            </form>
+        </div>
+
+        <div class="results-container">
+            <h2 class="results-header">Hotels in Goa (4 Results)</h2>
+
+            <div class="hotel-result-card">
+                <div class="hotel-info">
+                    <div class="hotel-details">
+                        <div class="name">The Grand Plaza</div>
+                        <img src="e:\SEM-3\CLIENT SIDE\grand plaza.jpg" style="width:200px;height:120px;">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="location">Panaji | Excellent (9.2/10)</div>
+                    </div>
+                    <div class="amenities-details">
+                        <p><i class="fa-solid fa-wifi"></i> Free Wi-Fi</p>
+                        <p><i class="fa-solid fa-mug-hot"></i> Breakfast Included</p>
+                        <p><i class="fa-solid fa-parking"></i> Free Parking</p>
+                        <p><i class="fa-solid fa-spa"></i> Spa & Wellness</p>
+                    </div>
+                </div>
+                <div class="price-section">
+                    <div class="price">₹12,500</div>
+                    <div class="per-night">per night</div>
+                    <br>
+                    <button class="book-button" onclick="showConfirmation()">Book Now</button>
+                </div>
+            </div>
+
+            <div class="hotel-result-card">
+                <div class="hotel-info">
+                    <div class="hotel-details">
+                        <div class="name">Classic Star Apartment</div>
+                        <img src="e:\SEM-3\CLIENT SIDE\homestay.jpg" style="width:200px;height:120px;">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="location">Central District | Very Good (8.8/10)</div>
+                    </div>
+                    <div class="amenities-details">
+                        <p><i class="fa-solid fa-wifi"></i> Free Wi-Fi</p>
+                        <p><i class="fa-solid fa-bath"></i> Ensuite Bathroom</p>
+                        <p><i class="fa-solid fa-dumbbell"></i> Fitness Center</p>
+                    </div>
+                </div>
+                <div class="price-section">
+                    <div class="price">₹9,800</div>
+                    <div class="per-night">per night</div>
+                    <br>
+                    <button class="book-button" onclick="showConfirmation()">Book Now</button>
+                </div>
+            </div>
+
+            <div class="hotel-result-card">
+                <div class="hotel-info">
+                    <div class="hotel-details">
+                        <div class="name">The Budget Stay Inn</div>
+                        <img src="e:\SEM-3\CLIENT SIDE\inn.jpg" style="width:200px;height:120px;">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="location">Near Airport | Good Value (7.9/10)</div>
+                    </div>
+                    <div class="amenities-details">
+                        <p><i class="fa-solid fa-wifi"></i> Free Wi-Fi</p>
+                        <p><i class="fa-solid fa-bed"></i> Comfort Beds</p>
+                        <p><i class="fa-solid fa-bus"></i> Free Shuttle</p>
+                    </div>
+                </div>
+                <div class="price-section">
+                    <div class="price">₹4,200</div>
+                    <div class="per-night">per night</div>
+                    <br>
+                    <button class="book-button" onclick="showConfirmation()">Book Now</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function showConfirmation() {
+            // Get the main content area container that holds the search and results.
+            const mainContent = document.getElementById('hotel-listing-page');
+            
+            // Generate the HTML for the "Booking Confirmed" page
+            const confirmationHTML = `
+                <div class="confirmation-box">
+                    <h1>Booking Confirmed!</h1>
+                    <p>Your hotel reservation has been successfully completed. You will receive the details shortly via email.</p>
+                    <p style="font-weight: 600; color: #007bff;">Thank you for booking with TraveLLO.</p>
+                    <a href="client home page.html" class="home-btn">Go to Home Page</a>
+                </div>
+            `;
+
+            // Replace the entire content of the main content area with the confirmation page
+            mainContent.innerHTML = confirmationHTML;
+
+            // Optional: Scroll to the top to ensure the message is visible
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

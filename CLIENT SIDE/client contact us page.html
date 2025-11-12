@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraveLLO - Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+    /* --- Navigation Bar Styles --- */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%; /* Adjust padding as needed */
+        background-color: #ffffff;
+        border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: sticky; /* Keeps the nav bar visible at the top */
+        top: 0;
+        z-index: 1000;
+        min-height: 50px;
+    }
+
+    .logo {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px; /* Spacing between links */
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-links a.nav-link {
+        text-decoration: none;
+        color: #555;
+        font-size: 1.0em;
+        font-weight: 500;
+        transition: color 0.3s ease, border-bottom 0.3s ease;
+        padding: 5px 0;
+    }
+
+    .nav-links a.nav-link:hover {
+        color: #007bff; /* Highlight color on hover */
+    }
+
+    /* Style for the active/current page link */
+    .nav-links a.active {
+        color: #007bff;
+        border-bottom: 2px solid #007bff;
+        font-weight: 600;
+    }
+
+    /* Basic responsiveness for smaller screens */
+    @media (max-width: 900px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-bottom: 10px;
+        }
+        .nav-links {
+            flex-wrap: wrap;
+            margin-top: 10px;
+            gap: 15px;
+        }
+    }
+</style>
+    <style>
+        /* General Reset and Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif; /* Using Poppins for better visual */
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Existing non-nav styles preserved */
+
+        .contact-container {
+            display: flex;
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        .form-panel, .info-panel {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-panel {
+            flex: 2; /* Takes up 2/3 of the space */
+        }
+
+        .info-panel {
+            flex: 1; /* Takes up 1/3 of the space */
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #007bff; /* Accent color */
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #333;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            font-size: 1em;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .submit-button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .contact-detail {
+            margin-bottom: 20px;
+        }
+
+        .contact-detail i {
+            font-size: 1.2em;
+            color: #007bff;
+            margin-right: 8px;
+        }
+
+        .contact-detail p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .contact-detail a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .contact-detail a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Confirmation Styles (New) --- */
+        .confirmation-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 50px;
+            background-color: #fff;
+            border: 2px solid #28a745; /* Green border for success */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+            max-width: 800px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 400px;
+        }
+        
+        .confirmation-box .icon {
+            font-size: 4em;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .confirmation-box h2 {
+            color: #28a745;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .confirmation-box p {
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .home-btn {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="client home page.html" class="logo"></a>
+        <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="left image" style="float:left;margin:5px;width:100px;height:auto;">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="client home page.html" class="nav-link">Home</a></li>
+                <li><a href="client flight page.html" class="nav-link">Flights</a></li>
+                <li><a href="client hotel page.html" class="nav-link">Hotels</a></li>
+                <li><a href="client train page.html" class="nav-link">Trains</a></li>
+                <li><a href="client booking page.html" class="nav-link">My Bookings</a></li>
+                <li><a href="client payment page.html" class="nav-link">Payments</a></li>
+                <li><a href="client about us page.html" class="nav-link">About Us</a></li>
+                <li><a href="client contact us page.html" class="nav-link active">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="contact-container" id="contact-page-content">
+
+        <div class="form-panel">
+            <h1>Get in Touch</h1>
+            <p>We're here to help with your travel questions, bookings, and feedback. Fill out the form below or use the direct contact information on the right.</p>
+
+            <form id="contactForm" onsubmit="showConfirmation(event)">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">-- Select Subject --</option>
+                        <option value="booking">New Booking Inquiry</option>
+                        <option value="change">Change/Cancel Existing Booking</option>
+                        <option value="feedback">General Feedback</option>
+                        <option value="other">Other Inquiry</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-button">
+                    <i class="fa-solid fa-paper-plane"></i> Submit Inquiry
+                </button>
+            </form>
+        </div>
+
+        <div class="info-panel">
+            <h3>Contact Information</h3>
+
+            <div class="contact-detail">
+                <p><i class="fa-solid fa-phone"></i> **Phone Support**</p>
+                <p style="margin-left: 30px;"><a href="tel:+18001234567">+1-800-123-4567</a> (24/7)</p>
+            </div>
+            
+            <div class="contact-detail">
+                <p><i class="fa-solid fa-envelope"></i> **Email Support**</p>
+                <p style="margin-left: 30px;"><a href="mailto:support@travello.com">support@travello.com</a></p>
+            </div>
+            
+            <div class="contact-detail">
+                <p><i class="fa-solid fa-map-marker-alt"></i> **Corporate Office**</p>
+                <p style="margin-left: 30px;">TraveLLO Inc.</p>
+                <p style="margin-left: 30px;">100 Global Tower, Suite 500</p>
+                <p style="margin-left: 30px;">New York, NY 10001</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showConfirmation(event) {
+            // Prevent the default form submission behavior (which would reload the page)
+            event.preventDefault();
+            
+            // Get the main contact container element by its ID
+            const mainContent = document.getElementById('contact-page-content');
+            
+            // Generate the HTML for the "Inquiry Submitted" confirmation page
+            const confirmationHTML = `
+                <div class="confirmation-box">
+                    <div class="icon"><i class="fa-solid fa-check-circle"></i></div>
+                    <h2>Inquiry Submitted!</h2>
+                    <p>Thank you for reaching out to us. Your message has been successfully sent.</p>
+                    <p>We typically respond to inquiries within 24-48 hours. Please check your email for a response.</p>
+                    <p style="font-weight: 600; color: #007bff;">Our team will be in touch soon.</p>
+                    <a href="client home page.html" class="home-btn">Go to Home Page</a>
+                </div>
+            `;
+
+            // Replace the entire content of the contact container with the confirmation page
+            mainContent.innerHTML = confirmationHTML;
+
+            // Optional: Scroll to the top to ensure the message is visible
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

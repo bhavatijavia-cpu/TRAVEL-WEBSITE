@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travello - Book Trains</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    /* --- Navigation Bar Styles --- */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        background-color: #ffffff;
+        border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .logo {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-links a.nav-link {
+        text-decoration: none;
+        color: #555;
+        font-size: 1em;
+        font-weight: 500;
+        transition: color 0.3s ease, border-bottom 0.3s ease;
+        padding: 5px 0;
+    }
+
+    .nav-links a.nav-link:hover {
+        color: #007bff;
+    }
+
+    .nav-links a.active {
+        color: #007bff;
+        border-bottom: 2px solid #007bff;
+        font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-bottom: 10px;
+        }
+        .nav-links {
+            flex-wrap: wrap;
+            margin-top: 10px;
+            gap: 15px;
+        }
+    }
+
+    /* --- General Styles --- */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f7f6;
+        color: #333;
+    }
+
+    /* --- Search Section --- */
+    .search-container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-title {
+        font-size: 1.5em;
+        color: #007bff;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .search-form {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr) 150px;
+        gap: 20px;
+        align-items: flex-end;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #555;
+        font-size: 0.9em;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select {
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 1em;
+    }
+
+    .search-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    .search-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* --- Train Results --- */
+    .results-container {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 0 30px;
+    }
+
+    .results-header {
+        font-size: 1.5em;
+        font-weight: 700;
+        color: #343a40;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .train-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        margin-bottom: 15px;
+        border: 1px solid #dee2e6;
+    }
+
+    .train-details {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .train-name {
+        font-weight: 700;
+        color: #007bff;
+        font-size: 1.1em;
+    }
+
+    .time-route {
+        font-size: 1.3em;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .route-path {
+        font-size: 0.9em;
+        color: #6c757d;
+    }
+
+    .duration {
+        font-size: 0.95em;
+        color: #007bff;
+        font-weight: 500;
+    }
+
+    .price-section {
+        text-align: right;
+    }
+
+    .price {
+        font-size: 1.6em;
+        font-weight: 700;
+        color: #dc3545;
+        margin-bottom: 10px;
+    }
+
+    .book-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+
+    .book-btn:hover {
+        background-color: #1e7e34;
+    }
+
+    /* --- Footer Warning --- */
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #fffbe7;
+        border-top: 1px solid #ddd;
+        text-align: left;
+        padding: 10px 40px;
+        font-size: 14px;
+        color: #b44a00;
+    }
+    
+    /* --- Confirmation Page Styles --- */
+    .confirmation-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 50px 20px;
+        margin-top: 50px;
+        background-color: #fff;
+        border: 2px solid #28a745;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+        max-width: 600px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px; /* Give it a set height for better visual centering */
+    }
+    
+    .confirmation-box .icon {
+        font-size: 4em;
+        color: #28a745;
+        margin-bottom: 15px;
+    }
+
+    .confirmation-box h1 {
+        color: #28a745;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    .confirmation-box p {
+        color: #555;
+        font-size: 1.1em;
+        margin-bottom: 30px;
+    }
+
+    .home-btn {
+        padding: 12px 25px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .home-btn:hover {
+        background-color: #0056b3;
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="client home page.html" class="logo"></a>
+        <img src="e:\SEM-3\CLIENT SIDE\travello.png" alt="Travello Logo" style="float:left;margin:5px;width:100px;height:auto;">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="client home page.html" class="nav-link">Home</a></li>
+                <li><a href="client flight page.html" class="nav-link">Flights</a></li>
+                <li><a href="client hotel page.html" class="nav-link">Hotels</a></li>
+                <li><a href="client train page.html" class="nav-link active">Trains</a></li>
+                <li><a href="client booking page.html" class="nav-link">My Bookings</a></li>
+                <li><a href="client payment page.html" class="nav-link">Payments</a></li>
+                <li><a href="client about us page.html" class="nav-link">About Us</a></li>
+                <li><a href="client contact us page.html" class="nav-link">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content-area" id="train-listing-page">
+        <div class="search-container">
+            <h1 class="search-title">Find Your Train</h1>
+            <form class="search-form">
+                <div class="form-group">
+                    <label for="from">From</label>
+                    <input type="text" id="from" placeholder="Departure Station" required>
+                </div>
+                <div class="form-group">
+                    <label for="to">To</label>
+                    <input type="text" id="to" placeholder="Arrival Station" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Departure Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="class">Travel Class</label>
+                    <select id="class">
+                        <option>Sleeper</option>
+                        <option>Third AC</option>
+                        <option>Second AC</option>
+                        <option>First AC</option>
+                    </select>
+                </div>
+                <div class="search-btn-container">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="results-container">
+            <h2 class="results-header">Available Trains (25 October 2025)</h2>
+
+            <div class="train-card">
+                <div class="train-details">
+                    <div class="train-name">HAPA–MADGAON EXPRESS</div>
+                    <div class="time-route">11:00PM <i class="fas fa-arrow-right"></i> 11:00AM</div>
+                    <div class="route-path">RJKT → GOA (Direct)</div>
+                    <div class="duration">Duration: **24h 00m** | Class: TWO-TIER AC</div>
+                </div>
+                <div class="price-section">
+                    <div class="price">₹1,500</div>
+                    <button class="book-btn" onclick="showConfirmation()">Book Now</button>
+                </div>
+            </div>
+
+            <div class="train-card">
+                <div class="train-details">
+                    <div class="train-name">VERAVAL EXPRESS</div>
+                    <div class="time-route">09:00AM <i class="fas fa-arrow-right"></i> 02:00PM</div>
+                    <div class="route-path">AHMD → RJKT (Direct)</div>
+                    <div class="duration">Duration: **04h 30m** | Class: THREE-TIER AC</div>
+                </div>
+                <div class="price-section">
+                    <div class="price">₹1,800</div>
+                    <button class="book-btn" onclick="showConfirmation()">Book Now</button>
+                </div>
+            </div>
+
+            <div class="train-card">
+                <div class="train-details">
+                    <div class="train-name">RAJDHANI EXPRESS</div>
+                    <div class="time-route">07:00PM <i class="fas fa-arrow-right"></i> 07:00AM</div>
+                    <div class="route-path">RJKT → DEL (Direct)</div>
+                    <div class="duration">Duration: **12h 00m** | Class: TWO-TIER AC</div>
+                </div>
+                <div class="price-section">
+                    <div class="price">₹2,000</div>
+                    <button class="book-btn" onclick="showConfirmation()">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showConfirmation() {
+            // Get the main content area element by its ID
+            const mainContent = document.getElementById('train-listing-page');
+            
+            // Generate the HTML for the "Booking Confirmed" page
+            const confirmationHTML = `
+                <div class="confirmation-box">
+                    <div class="icon"></div>
+                    <h1>Booking Confirmed!</h1>
+                    <p>Your train ticket has been successfully booked. You will receive the PNR details shortly via SMS and email.</p>
+                    <p style="font-weight: 600; color: #007bff;">Have a great journey with Travello.</p>
+                    <a href="client home page.html" class="home-btn">Go to Home Page</a>
+                </div>
+            `;
+
+            // Replace the entire content of the main content area with the confirmation page
+            mainContent.innerHTML = confirmationHTML;
+
+            // Optional: Scroll to the top to ensure the message is visible
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
